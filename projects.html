@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Mariam</title>
+  <meta name="description" content="Case studies: FlyRank AI internship, image interpolation in MATLAB, IoT solar panel monitoring, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-brand">Mariam.</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html" aria-current="page">Projects</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="section" style="padding-bottom: 0;">
+      <div class="container">
+        <span class="eyebrow">Case studies</span>
+        <h1>Projects, told with evidence.</h1>
+        <p style="max-width:600px;">Every case study below follows the same structure: Problem → What I Did → Outcome — so each claim stays something I can actually defend.</p>
+      </div>
+    </section>
+
+    <!-- ============ FLYRANK ============ -->
+    <section id="flyrank" class="section">
+      <div class="container">
+        <div class="card">
+          <span class="eyebrow">Internship · Remote · June 2026 – Present</span>
+          <h2>FlyRank AI Internship</h2>
+          <p>
+            FlyRank runs AI internship and learning programs that help students build
+            practical AI fluency — using AI tools productively, evaluating AI-generated
+            work critically, and applying AI to real tasks rather than accepting outputs
+            at face value.
+          </p>
+
+          <h3>What I've been doing</h3>
+          <ul>
+            <li>Completing weekly learning modules on AI collaboration, prompt engineering, and structured thinking</li>
+            <li>Setting up and configuring an AI toolkit (Claude, ChatGPT, Gemini, Perplexity) for different workflows</li>
+            <li>Building this portfolio through structured weekly assignments — sitemap, voice and writing style, and case studies</li>
+            <li>Practicing how to critically edit AI-generated writing so it reflects real evidence and my own voice</li>
+          </ul>
+
+          <h3>A real example: the proof-statement assignment</h3>
+          <p>
+            One assignment asked me to define a clear proof statement — a specific claim, audience,
+            and action for my portfolio. Reviewing my actual project history against my first draft
+            taught me the difference between making a claim and being able to defend it with evidence.
+          </p>
+
+          <div class="compare">
+            <div class="compare-block compare-before">
+              <span class="compare-label">Before — unsupported claim</span>
+              <p>"I build practical AI and machine learning projects that solve real-world problems."</p>
+            </div>
+            <div class="compare-block compare-after">
+              <span class="compare-label">After — evidence-based</span>
+              <p>"I'm building practical AI and machine learning skills through my internship, university projects, and continuous learning, while building on my engineering and image processing foundation."</p>
+            </div>
+          </div>
+
+          <div class="tag-row" style="margin-top:var(--space-md);">
+            <span class="tag tag-teal">AI-assisted critical thinking</span>
+            <span class="tag tag-teal">Prompt engineering</span>
+            <span class="tag tag-teal">Technical writing</span>
+            <span class="tag tag-teal">Portfolio strategy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ IMAGE INTERPOLATION ============ -->
+    <section id="interpolation" class="section section-alt">
+      <div class="container">
+        <div class="card">
+          <span class="eyebrow">Individual project · MATLAB · E-JUST coursework</span>
+          <h2>Image Processing &amp; Interpolation in MATLAB</h2>
+
+          <!-- PLACEHOLDER: add real comparison screenshots here -->
+          <div class="shot-placeholder">Add your side-by-side comparison images here (Nearest Neighbor / Bilinear / Bicubic)</div>
+
+          <h3>Problem</h3>
+          <p>
+            Image resizing requires estimating new pixel values that don't exist in the
+            original image, and different interpolation methods handle this estimation
+            differently — with real trade-offs between image quality and computational
+            cost. The goal was to implement and compare three common methods — Nearest
+            Neighbor, Bilinear, and Bicubic — to understand these trade-offs in practice.
+          </p>
+
+          <h3>What I Did</h3>
+          <p>
+            I wrote MATLAB code to load a sample image and resize it by a factor of 2×
+            using each method (via MATLAB's <code>imresize</code> function), keeping the
+            image and scaling factor identical across all three for a fair comparison.
+            I displayed the original and resized images side by side and evaluated them
+            qualitatively — sharpness, smoothness, edge quality, and pixelation.
+          </p>
+          <p>
+            Studying how each method estimates pixel values explained why the results
+            differed: Nearest Neighbor copies the closest existing pixel, Bilinear
+            averages nearby pixels, and Bicubic uses a wider neighborhood with a
+            smoother mathematical model.
+          </p>
+
+          <h3>Outcome</h3>
+          <p>
+            The comparison showed a clear trade-off: Nearest Neighbor was fastest but
+            produced visible pixelation, Bilinear balanced speed and quality, and Bicubic
+            produced the smoothest results at higher computational cost. I documented
+            these findings, along with the MATLAB code and comparison images, in a final
+            project report — concluding that the "best" method depends on the specific
+            requirements of the application: quality versus speed.
+          </p>
+
+          <div class="tag-row">
+            <span class="tag">MATLAB</span>
+            <span class="tag">Image Processing</span>
+            <span class="tag">Technical Documentation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ IOT SOLAR PANEL ============ -->
+    <section id="solar" class="section">
+      <div class="container">
+        <div class="card">
+          <span class="eyebrow">Team project (6 members) · E-JUST coursework</span>
+          <h2>IoT Solar Panel Performance Monitoring System</h2>
+
+          <!-- PLACEHOLDER: add a real photo of the hardware setup or LCD readout -->
+          <div class="shot-placeholder">Add a real photo of the hardware setup or LCD readout here</div>
+
+          <h3>What we built</h3>
+          <p>
+            A system monitoring a solar panel's voltage, current, temperature, and light
+            intensity, using an Arduino Uno, a DS18B20 temperature sensor, an LDR, and
+            an HC-06 Bluetooth module, with live readings shown on an LCD.
+          </p>
+
+          <h3>My role</h3>
+          <p>
+            Team member focused on system understanding, technical documentation, and
+            hardware assembly assistance. My contribution was to understand the complete
+            system well enough to document it accurately, assist with parts of the
+            hardware assembly, and write the final project report — explaining how the
+            different components worked together to monitor the solar panel's performance.
+          </p>
+
+          <h3>What it demonstrates</h3>
+          <p>
+            Ability to understand and communicate a multi-component technical system,
+            work effectively as part of a larger team, and connect hardware and software
+            concepts — foundational engineering skills I'm building on as I move toward
+            applied AI and machine learning work.
+          </p>
+
+          <div class="tag-row">
+            <span class="tag">Arduino</span>
+            <span class="tag">IoT</span>
+            <span class="tag">Team collaboration</span>
+            <span class="tag">Technical documentation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AUDIO AMPLIFIER — PLACEHOLDER ONLY ============ -->
+    <section id="audio-amplifier" class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Listed in the site plan</span>
+          <h2>Audio Amplifier Project</h2>
+        </div>
+        <div class="placeholder">
+          <strong>Not yet written up.</strong>
+          This project was listed in the portfolio build instructions, but no project
+          details were provided, so no case study has been invented for it. Add the
+          Problem → What I Did → Outcome details here once you have them, following the
+          same structure as the case studies above.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--offwhite); font-family:var(--font-heading);">Mariam</strong>
+        <div class="footer-note">Computer Science &amp; Engineering · E-JUST · AI Engineer in progress</div>
+      </div>
+      <ul class="nav-links" style="position:static; flex-direction:row; padding:0; background:none;">
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

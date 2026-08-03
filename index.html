@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mariam — AI Engineering Portfolio</title>
+  <meta name="description" content="Computer Science student at E-JUST building practical AI and machine learning skills through real projects and continuous learning." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-brand">Mariam.</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="container hero-inner">
+        <span class="eyebrow">AI Engineer in progress</span>
+        <h1>Computer science student learning by building, not just studying.</h1>
+        <p class="lede">
+          I'm Mariam, a Computer Science and Engineering student at E-JUST, developing
+          practical AI and machine learning skills through internships, coursework,
+          and hands-on projects — and being honest about what I've actually built so far.
+        </p>
+        <div class="hero-actions">
+          <a href="projects.html" class="btn btn-primary">View my projects</a>
+          <a href="about.html" class="btn btn-outline">More about me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURED PROJECTS ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Featured work</span>
+          <h2>Projects I can actually defend</h2>
+          <p>Each case study follows the same structure I hold myself to: Problem → What I Did → Outcome.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <span class="eyebrow">Internship</span>
+            <h3>FlyRank AI Internship</h3>
+            <p>Building AI-collaboration and prompt engineering skills through structured weekly modules and portfolio work.</p>
+            <div class="tag-row">
+              <span class="tag tag-teal">Prompt Engineering</span>
+              <span class="tag tag-teal">Portfolio Strategy</span>
+            </div>
+            <a href="projects.html#flyrank">Read the case study →</a>
+          </article>
+
+          <article class="card">
+            <span class="eyebrow">MATLAB · Individual project</span>
+            <h3>Image Interpolation</h3>
+            <p>Implemented and compared Nearest Neighbor, Bilinear, and Bicubic interpolation to understand quality vs. speed trade-offs.</p>
+            <div class="tag-row">
+              <span class="tag">MATLAB</span>
+              <span class="tag">Image Processing</span>
+            </div>
+            <a href="projects.html#interpolation">Read the case study →</a>
+          </article>
+
+          <article class="card">
+            <span class="eyebrow">Team project · E-JUST</span>
+            <h3>IoT Solar Panel Monitoring</h3>
+            <p>Documented and helped assemble a 6-person team's Arduino-based system for monitoring solar panel performance.</p>
+            <div class="tag-row">
+              <span class="tag">Arduino</span>
+              <span class="tag">IoT</span>
+            </div>
+            <a href="projects.html#solar">Read the case study →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Toolkit</span>
+          <h2>Skills I'm actively building</h2>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>AI collaboration</h3>
+            <p>Prompt engineering, structured thinking, evaluating AI output critically instead of accepting it at face value.</p>
+          </div>
+          <div class="skill-card">
+            <h3>Technical writing</h3>
+            <p>Documenting multi-component systems clearly, from hardware assembly to final project reports.</p>
+          </div>
+          <div class="skill-card">
+            <h3>Image processing</h3>
+            <p>MATLAB — interpolation methods, image resizing, and qualitative image-quality evaluation.</p>
+          </div>
+          <div class="skill-card">
+            <h3>Hardware &amp; IoT</h3>
+            <p>Arduino Uno, sensors (DS18B20, LDR), Bluetooth modules (HC-06), and system-level documentation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE PREVIEW ============ -->
+    <section class="section section-navy">
+      <div class="container">
+        <div class="grid grid-2" style="align-items:center;">
+          <div>
+            <span class="eyebrow">Currently</span>
+            <h2>AI Intern at FlyRank</h2>
+            <p style="color:rgba(247,249,251,0.8);">
+              Completing weekly modules on AI collaboration, prompt engineering, and portfolio strategy —
+              and learning to tell the difference between a claim and something I can defend with evidence.
+            </p>
+            <a href="experience.html" class="btn btn-outline">See the full experience →</a>
+          </div>
+          <div>
+            <div class="card" style="background:rgba(247,249,251,0.06); border-color:rgba(247,249,251,0.2);">
+              <span class="compare-label" style="color:var(--teal);">A principle I hold to</span>
+              <p style="color:rgba(247,249,251,0.85); font-style:italic; margin:0;">
+                "A believable claim supported by real evidence is stronger than an
+                impressive-sounding one I couldn't defend in an interview."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT CTA ============ -->
+    <section class="section">
+      <div class="container" style="text-align:center;">
+        <h2>Let's talk about AI, projects, or opportunities</h2>
+        <p style="max-width:520px; margin:0 auto var(--space-md);">
+          I'm always learning and open to conversations about internships, collaborations, or feedback on my work.
+        </p>
+        <a href="contact.html" class="btn btn-primary">Get in touch</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--offwhite); font-family:var(--font-heading);">Mariam</strong>
+        <div class="footer-note">Computer Science &amp; Engineering · E-JUST · AI Engineer in progress</div>
+      </div>
+      <ul class="nav-links" style="position:static; flex-direction:row; padding:0; background:none;">
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

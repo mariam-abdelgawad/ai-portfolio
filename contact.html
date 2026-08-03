@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Mariam</title>
+  <meta name="description" content="Get in touch with Mariam — resume, GitHub, LinkedIn, and email." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-brand">Mariam.</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="section" style="padding-bottom:0;">
+      <div class="container">
+        <span class="eyebrow">Contact</span>
+        <h1>Let's talk.</h1>
+        <p style="max-width:560px;">
+          Whether it's about AI, one of my projects, or an opportunity — I'd like to hear from you.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-grid">
+
+        <div>
+          <h2>Find me here</h2>
+          <ul class="contact-links">
+            <li>
+              <!-- PLACEHOLDER: replace # with your real resume file link -->
+              <a href="#" target="_blank" rel="noopener">📄 Resume (PDF)</a>
+            </li>
+            <li>
+              <!-- PLACEHOLDER: replace with your real GitHub profile URL -->
+              <a href="#" target="_blank" rel="noopener">💻 GitHub</a>
+            </li>
+            <li>
+              <!-- PLACEHOLDER: replace with your real LinkedIn profile URL -->
+              <a href="#" target="_blank" rel="noopener">🔗 LinkedIn</a>
+            </li>
+            <li>
+              <!-- PLACEHOLDER: replace with your real email address -->
+              <a href="mailto:your.email@example.com">✉️ your.email@example.com</a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Send a message</h2>
+          <form class="contact-form">
+            <div>
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send message</button>
+            <p class="form-status" role="status"></p>
+          </form>
+          <p style="font-size:0.85rem; color:var(--steel);">
+            Note: this form is front-end only for now — it shows a confirmation message
+            but doesn't send an email yet. To make it work, connect it to a service like
+            <a href="https://formspree.io" target="_blank" rel="noopener">Formspree</a>
+            or <a href="https://www.emailjs.com" target="_blank" rel="noopener">EmailJS</a>.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:var(--offwhite); font-family:var(--font-heading);">Mariam</strong>
+        <div class="footer-note">Computer Science &amp; Engineering · E-JUST · AI Engineer in progress</div>
+      </div>
+      <ul class="nav-links" style="position:static; flex-direction:row; padding:0; background:none;">
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
