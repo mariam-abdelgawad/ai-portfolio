@@ -403,6 +403,36 @@ img { max-width: 100%; display: block; }
   padding: var(--space-sm);
 }
 
+.figure {
+  margin: 0 0 var(--space-sm);
+}
+.figure img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-soft);
+}
+.figure figcaption {
+  font-size: 0.82rem;
+  color: var(--steel);
+  margin-top: 6px;
+  font-style: italic;
+}
+.figure-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+@media (max-width: 700px) { .figure-row { grid-template-columns: 1fr; } }
+
+.avatar-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--teal);
+}
+
 .shot-placeholder {
   width: 100%;
   aspect-ratio: 16/9;
