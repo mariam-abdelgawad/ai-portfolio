@@ -91,10 +91,10 @@
           <span class="eyebrow">Individual project · MATLAB · E-JUST coursework</span>
           <h2>Image Processing &amp; Interpolation in MATLAB</h2>
 
-          <!-- PLACEHOLDER: the uploaded report (Numerical Analysis / Bicubic Interpolation) contains
-               conceptual diagrams but not the actual Nearest Neighbor / Bilinear / Bicubic output
-               comparison. Upload those specific screenshots to replace this box. -->
-          <div class="shot-placeholder">Add your side-by-side comparison images here (Nearest Neighbor / Bilinear / Bicubic) — these weren't among the files uploaded so far</div>
+          <figure class="figure">
+            <img src="assets/matlab-interpolation-comparison.png" alt="MATLAB figure showing the original image alongside Nearest Neighbor, Bilinear, and Bicubic interpolation results" />
+            <figcaption>MATLAB output: original image vs. Nearest Neighbor, Bilinear, and Bicubic interpolation results.</figcaption>
+          </figure>
 
           <h3>Problem</h3>
           <p>
@@ -205,26 +205,71 @@
     <section id="audio-amplifier" class="section section-alt">
       <div class="container">
         <div class="card">
-          <span class="eyebrow">Individual project · Electronics Lab · E-JUST coursework</span>
-          <h2>Audio Amplifier using the LM386 IC</h2>
+          <span class="eyebrow">Individual project · ECE 212 – Electronics Engineering Lab · E-JUST coursework</span>
+          <h2>Audio Amplifier Using the LM386 IC</h2>
+
+          <div class="figure-row">
+            <figure class="figure">
+              <img src="assets/audio-amp-schematic.png" alt="Circuit schematic of the LM386 audio amplifier with capacitors, resistor, speaker, and AUX input" style="background:#fff; padding:12px;" />
+              <figcaption>Circuit schematic: LM386, gain and coupling capacitors, 2.2 kΩ input resistor, and 8Ω speaker.</figcaption>
+            </figure>
+            <figure class="figure">
+              <img src="assets/audio-amp-breadboard.png" alt="Breadboard layout of the audio amplifier circuit with a 9V battery, speaker, and USB power input" style="background:#fff; padding:12px;" />
+              <figcaption>Breadboard layout of the circuit, powered by a 9V battery.</figcaption>
+            </figure>
+          </div>
+
+          <h3>Problem</h3>
+          <p>
+            The goal was to build a simple audio amplifier that takes a weak audio signal
+            from an AUX source (phone, laptop) and plays it through a small speaker with
+            clear, amplified sound — without needing powered external speakers — while
+            learning the practical roles of resistors, capacitors, and grounding in a real
+            audio circuit.
+          </p>
 
           <h3>What I Did</h3>
           <p>
-            Designed and implemented an audio amplifier circuit using the LM386 IC,
-            applying analog circuit design principles and component integration techniques.
+            I built the circuit around a single LM386 op-amp IC on a breadboard, powered
+            by a 9V battery. Key components: a 2.2 kΩ input resistor and 22 µF input
+            capacitor to couple the AUX signal into pin 3, a 22 µF gain capacitor between
+            pins 1 and 8 to raise the gain from its default of 20 up to 200, a 100 µF
+            output capacitor to block DC before the signal reaches the 8Ω speaker, and a
+            1 µF bypass capacitor on pin 7 to reduce internal noise.
+          </p>
+          <p>
+            To verify the design before relying on the physical build, I also simulated
+            the circuit in LTspice with a 1kHz sine-wave input, running a 10ms transient
+            analysis to compare the input and output waveforms.
           </p>
 
-          <div class="placeholder">
-            <strong>Outcome not yet documented.</strong>
-            The resume lists this project's scope, but no measured results, circuit
-            diagram, or photos have been provided yet. Add the Outcome section — what
-            you measured or observed — plus a schematic or photo once you have them.
-          </div>
+          <figure class="figure" style="max-width:640px; margin: var(--space-sm) auto;">
+            <img src="assets/audio-amp-ltspice-waveform.png" alt="LTspice transient simulation plot showing the input sine wave and the larger amplified output waveform" style="background:#fff; padding:8px;" />
+            <figcaption>LTspice transient simulation: input signal (green) vs. amplified output (blue), 0–10ms.</figcaption>
+          </figure>
+
+          <h3>Outcome</h3>
+          <p>
+            The LTspice simulation confirmed a voltage gain of approximately 200 (calculated
+            from Gain = V<sub>out</sub>/V<sub>in</sub> with the 22 µF gain capacitor in place),
+            producing a clean, amplified sine wave with no visible distortion or clipping —
+            matching the behavior of the breadboard circuit. Based on the speaker's 8Ω, 0.25W
+            rating, I calculated a safe RMS output of about 1.41V (from P = V<sub>rms</sub>²/R).
+            The input impedance, set by the 2.2 kΩ resistor, stayed in a safe range for phone
+            and laptop AUX outputs. Overall, the circuit amplified a weak audio signal into
+            clear, audible sound suitable for a small portable speaker.
+          </p>
 
           <div class="tag-row">
             <span class="tag">LM386</span>
             <span class="tag">Analog Circuit Design</span>
+            <span class="tag">LTspice</span>
+            <span class="tag">Breadboarding</span>
           </div>
+
+          <p style="margin-top:var(--space-md);">
+            <a href="assets/audio-amplifier-report.pdf" target="_blank" rel="noopener">Read the full project report (PDF) →</a>
+          </p>
         </div>
       </div>
     </section>
