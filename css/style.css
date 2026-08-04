@@ -88,11 +88,11 @@ img { max-width: 100%; display: block; }
 
 .eyebrow {
   font-family: var(--font-heading);
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--teal);
-  font-weight: 600;
+  font-weight: 700;
   display: block;
   margin-bottom: var(--space-xs);
 }
