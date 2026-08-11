@@ -1,0 +1,543 @@
+<div id="mariam-agent-root"></div>
+<style>
+  #mariam-agent-root {
+    --navy: #14213D;
+    --steel: #4A6FA5;
+    --teal: #2EC4B6;
+    --offwhite: #F7F9FB;
+    --charcoal: #2B2B2B;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--offwhite);
+    color: var(--charcoal);
+    min-height: 100%;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  #mariam-agent-root * { box-sizing: border-box; }
+
+  @font-face {
+    font-family: 'Space Grotesk';
+    src: local('Space Grotesk');
+  }
+
+  .ma-shell {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 20px 40px;
+  }
+
+  .ma-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .ma-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--navy), var(--steel));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .ma-avatar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(46,196,182,0.55) 0%, transparent 45%),
+      radial-gradient(circle at 70% 70%, rgba(46,196,182,0.35) 0%, transparent 50%);
+  }
+  .ma-avatar span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: white;
+    font-size: 20px;
+    z-index: 1;
+  }
+  .ma-title h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 0 2px;
+    letter-spacing: -0.01em;
+  }
+  .ma-title p {
+    font-size: 13px;
+    color: var(--steel);
+    margin: 0;
+    font-weight: 500;
+  }
+  .ma-status {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: var(--steel);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .ma-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 3px rgba(46,196,182,0.2);
+  }
+
+  .ma-panel {
+    background: white;
+    border: 1px solid rgba(20,33,61,0.08);
+    border-radius: 18px;
+    box-shadow: 0 1px 3px rgba(20,33,61,0.06), 0 8px 24px rgba(20,33,61,0.05);
+    overflow: hidden;
+  }
+
+  .ma-thread {
+    padding: 22px 22px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 480px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+  .ma-thread::-webkit-scrollbar { width: 6px; }
+  .ma-thread::-webkit-scrollbar-thumb { background: rgba(20,33,61,0.15); border-radius: 10px; }
+
+  .ma-msg {
+    display: flex;
+    gap: 10px;
+    max-width: 100%;
+    animation: maFadeIn 0.25s ease;
+  }
+  @keyframes maFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .ma-msg.user { flex-direction: row-reverse; }
+  .ma-bubble {
+    padding: 11px 15px;
+    border-radius: 14px;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .ma-msg.agent .ma-bubble {
+    background: var(--offwhite);
+    border: 1px solid rgba(20,33,61,0.07);
+    color: var(--charcoal);
+    border-top-left-radius: 4px;
+    max-width: 88%;
+  }
+  .ma-msg.user .ma-bubble {
+    background: var(--navy);
+    color: white;
+    border-top-right-radius: 4px;
+    max-width: 82%;
+  }
+  .ma-bubble h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    margin: 0 0 6px;
+    color: var(--steel);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-weight: 700;
+  }
+  .ma-bubble ul { margin: 6px 0 0; padding-left: 18px; }
+  .ma-bubble li { margin-bottom: 3px; }
+  .ma-bubble strong { color: var(--navy); }
+  .ma-msg.user .ma-bubble strong { color: white; }
+  .ma-avatar-sm {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--navy), var(--steel));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; font-weight: 700; color: white;
+  }
+
+  .ma-typing {
+    display: flex; gap: 4px; padding: 4px 2px;
+  }
+  .ma-typing span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--steel);
+    opacity: 0.5;
+    animation: maBounce 1.1s infinite ease-in-out;
+  }
+  .ma-typing span:nth-child(2) { animation-delay: 0.15s; }
+  .ma-typing span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes maBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-4px); opacity: 1; }
+  }
+
+  .ma-suggestions {
+    padding: 12px 22px 16px;
+    border-top: 1px solid rgba(20,33,61,0.06);
+  }
+  .ma-suggestions p {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--steel);
+    font-weight: 700;
+    margin: 0 0 9px;
+  }
+  .ma-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ma-chip {
+    background: var(--offwhite);
+    border: 1px solid rgba(20,33,61,0.12);
+    color: var(--navy);
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: 7px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+  }
+  .ma-chip:hover {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  .ma-inputrow {
+    display: flex;
+    gap: 8px;
+    padding: 14px 18px 18px;
+    border-top: 1px solid rgba(20,33,61,0.06);
+    background: white;
+  }
+  .ma-inputrow input {
+    flex: 1;
+    border: 1.5px solid rgba(20,33,61,0.14);
+    border-radius: 12px;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+    color: var(--charcoal);
+  }
+  .ma-inputrow input:focus { border-color: var(--teal); }
+  .ma-inputrow button {
+    background: var(--navy);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 0 20px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+  .ma-inputrow button:hover { background: var(--steel); }
+  .ma-inputrow button:disabled { opacity: 0.4; cursor: default; }
+
+  .ma-footer {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 11.5px;
+    color: rgba(20,33,61,0.45);
+  }
+
+  @media (max-width: 480px) {
+    .ma-shell { padding: 18px 12px 28px; }
+    .ma-thread { max-height: 60vh; }
+  }
+</style>
+
+<script>
+(function() {
+  const root = document.getElementById('mariam-agent-root');
+
+  // ---------- CONFIRMED PROFILE DATA (single source of truth) ----------
+  const PROFILE = {
+    name: "Mariam",
+    fullContext: "Mariam is a third-year Computer Science and Engineering student at Egypt-Japan University of Science and Technology (E-JUST).",
+  };
+
+  const ANSWERS = {
+    intro: {
+      title: "Who is Mariam?",
+      html: `Mariam is a third-year <strong>Computer Science and Engineering (CSE)</strong> student at
+      <strong>Egypt-Japan University of Science and Technology (E-JUST)</strong>, in the Electronics,
+      Communications and Computer Engineering (ECCE) school. She's building her skills toward
+      <strong>AI / applied AI engineering</strong> through coursework, an AI Fluency internship at FlyRank,
+      and hands-on projects in IoT and image processing. She's currently building her portfolio and skills —
+      not presenting herself as an experienced AI engineer yet.`
+    },
+    education: {
+      title: "Education",
+      html: `<ul>
+        <li><strong>University:</strong> Egypt-Japan University of Science and Technology (E-JUST)</li>
+        <li><strong>Faculty:</strong> Engineering</li>
+        <li><strong>School:</strong> Electronics, Communications and Computer Engineering (ECCE)</li>
+        <li><strong>Major:</strong> Computer Science and Engineering (CSE)</li>
+        <li><strong>Current year:</strong> Third year</li>
+        <li><strong>Expected graduation:</strong> 2028</li>
+        <li><strong>GPA:</strong> 3.47</li>
+      </ul>`
+    },
+    internship: {
+      title: "FlyRank AI Internship",
+      html: `Mariam is completing the <strong>AI Fluency – Foundations</strong> track at FlyRank.
+      This involves AI Fluency assignments covering AI-assisted workflows, portfolio development, working with
+      AI tools, and learning to use AI effectively and critically — rather than accepting AI output at face value.
+      <br><br>This is a <strong>learning and skill-development program</strong>, not professional AI engineering employment,
+      and it hasn't involved building production AI systems.`
+    },
+    iot: {
+      title: "IoT Solar Panel Monitoring System",
+      html: `A <strong>team project (6 members)</strong> built as part of E-JUST coursework.
+      <br><br><strong>Goal:</strong> build a simple, low-cost system that monitors how well a solar panel is performing —
+      measuring actual power output and comparing it to expected power based on sunlight and temperature, with a
+      loss/status statement.
+      <br><br><strong>Hardware used:</strong>
+      <ul>
+        <li>Arduino Uno</li>
+        <li>9V, 5W solar panel</li>
+        <li>DS18B20 temperature sensor</li>
+        <li>GL10528 photoresistor (LDR)</li>
+        <li>16×2 I2C LCD screen</li>
+        <li>HC-06 Bluetooth module</li>
+        <li>Resistor network: 4× 6Ω resistors in parallel as a load, 17Ω shunt resistor, 10kΩ + 1kΩ voltage divider</li>
+      </ul>
+      <strong>How it works:</strong> a voltage divider safely scales the panel voltage for the Arduino to read;
+      a 17Ω shunt resistor is used to calculate current; actual power = measured voltage × measured current;
+      expected power is estimated from light and temperature; efficiency = actual/expected power × 100.
+      Readings display on the LCD and are also sent via Bluetooth (HC-06) to a phone or laptop.
+      <br><br><strong>Mariam's role:</strong> understanding the full system well enough to document it accurately,
+      assisting with hardware assembly, and writing the final project report.`
+    },
+    matlab: {
+      title: "Image Interpolation in MATLAB",
+      html: `An individual E-JUST coursework project comparing three image interpolation methods in MATLAB —
+      <strong>Nearest Neighbor</strong>, <strong>Bilinear</strong>, and <strong>Bicubic</strong> — using MATLAB's
+      <code>imresize()</code> function.
+      <br><br>The comparison focused on sharpness, smoothness, edge quality, pixelation, and computational cost.
+      Nearest Neighbor was fastest but showed visible pixelation; Bilinear balanced speed and quality;
+      Bicubic gave the smoothest results at higher computational cost. No specific numerical performance
+      results are included in Mariam's profile beyond this qualitative comparison.`
+    },
+    audio: {
+      title: "Audio Amplifier Project",
+      html: `Mariam built an <strong>audio amplifier using the LM386 IC</strong>. Beyond that, no further technical
+      details, circuit values, gain figures, or performance results are currently included in her profile.`
+    },
+    certifications: {
+      title: "Certifications",
+      html: `Mariam holds an <strong>AI Fluency: Framework & Foundations</strong> certificate from
+      <strong>Anthropic Education</strong>. No other certifications are currently included in her profile.`
+    },
+    skills: {
+      title: "Technical Skills",
+      html: `<ul>
+        <li>Python</li>
+        <li>OpenCV</li>
+        <li>MATLAB</li>
+        <li>Arduino</li>
+        <li>Verilog HDL</li>
+        <li>LTSpice</li>
+        <li>SolidWorks</li>
+        <li>AI tools: Claude, ChatGPT, Gemini, Perplexity</li>
+      </ul>
+      Mariam is actively building deeper machine learning skills, but does not yet claim advanced expertise in
+      areas like PyTorch, TensorFlow, LangChain, RAG, or model fine-tuning.`
+    },
+    career: {
+      title: "Career Interests",
+      html: `Mariam is a <strong>third-year CSE student</strong> currently building her skills and portfolio toward
+      <strong>AI / applied AI engineering</strong>. She's interested in <strong>AI engineering internships and
+      learning opportunities</strong> — she is not presenting herself as an experienced AI engineer, and prefers
+      roles where she can keep building real, evidence-backed skills.`
+    },
+    volunteer: {
+      title: "Volunteer Experience",
+      html: `Mariam does not have volunteer experience. That information is not currently included in her profile.`
+    },
+    contact: {
+      title: "Contact",
+      html: `<ul>
+        <li><strong>Portfolio:</strong> <a href="https://mariam-abdelgawad.github.io/ai-portfolio/" target="_blank" rel="noopener">mariam-abdelgawad.github.io/ai-portfolio</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/mariam-abdelgawad" target="_blank" rel="noopener">github.com/mariam-abdelgawad</a></li>
+        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/mariam-abdelgawad-936436411" target="_blank" rel="noopener">linkedin.com/in/mariam-abdelgawad</a></li>
+        <li><strong>Email:</strong> mariam.120240087@ejust.edu.eg</li>
+      </ul>`
+    },
+    projects_overview: {
+      title: "Projects Overview",
+      html: `Mariam's confirmed projects:
+      <ul>
+        <li><strong>IoT Solar Panel Performance Monitoring System</strong> — team project (6 members), E-JUST coursework</li>
+        <li><strong>Image Interpolation Comparison in MATLAB</strong> — individual E-JUST coursework project</li>
+        <li><strong>Audio Amplifier (LM386 IC)</strong> — project, limited detail on record</li>
+      </ul>
+      Ask about any one of these for more detail.`
+    }
+  };
+
+  const NOT_AVAILABLE = `That information is not currently included in Mariam's profile.`;
+
+  // ---------- Intent matching (keyword-based, deterministic) ----------
+  const INTENTS = [
+    { key: 'intro', patterns: ['who are you', 'who is mariam', 'about you', 'introduce', 'tell me about yourself', 'tell me about mariam'] },
+    { key: 'education', patterns: ['education', 'university', 'e-just', 'ejust', 'gpa', 'major', 'graduat', 'school', 'faculty', 'year of study', 'degree'] },
+    { key: 'internship', patterns: ['internship', 'flyrank', 'intern', 'ai fluency'] },
+    { key: 'iot', patterns: ['iot', 'solar', 'panel', 'arduino', 'sensor', 'bluetooth', 'hc-06', 'ds18b20'] },
+    { key: 'matlab', patterns: ['matlab', 'interpolation', 'image processing', 'bilinear', 'bicubic', 'nearest neighbor', 'imresize'] },
+    { key: 'audio', patterns: ['audio', 'amplifier', 'lm386'] },
+    { key: 'certifications', patterns: ['certificat', 'anthropic education'] },
+    { key: 'skills', patterns: ['skill', 'tools', 'technolog', 'python', 'opencv', 'verilog', 'ltspice', 'solidworks', 'programming'] },
+    { key: 'career', patterns: ['career', 'looking for', 'interested in', 'opportunit', 'role', 'position', 'goal'] },
+    { key: 'volunteer', patterns: ['volunteer'] },
+    { key: 'contact', patterns: ['contact', 'email', 'github', 'linkedin', 'reach', 'portfolio link', 'resume', 'cv'] },
+    { key: 'projects_overview', patterns: ['project', 'projects', 'work on', 'built'] },
+  ];
+
+  function matchIntent(text) {
+    const t = text.toLowerCase();
+    let best = null, bestScore = 0;
+    for (const intent of INTENTS) {
+      for (const p of intent.patterns) {
+        if (t.includes(p)) {
+          const score = p.length;
+          if (score > bestScore) { bestScore = score; best = intent.key; }
+        }
+      }
+    }
+    return best;
+  }
+
+  function getAnswer(text) {
+    const key = matchIntent(text);
+    if (key && ANSWERS[key]) return ANSWERS[key];
+    return { title: "Not in Profile", html: NOT_AVAILABLE };
+  }
+
+  // ---------- Suggested questions ----------
+  const SUGGESTIONS = [
+    "Who is Mariam?",
+    "What is her education background?",
+    "Tell me about the FlyRank internship",
+    "What projects has she worked on?",
+    "What are her technical skills?",
+    "What is she looking for in a career?",
+    "How can I contact her?"
+  ];
+
+  // ---------- Render shell ----------
+  root.innerHTML = `
+    <div class="ma-shell">
+      <div class="ma-header">
+        <div class="ma-avatar"><span>M</span></div>
+        <div class="ma-title">
+          <h1>Mariam's AI Career Assistant</h1>
+          <p>CSE @ E-JUST · Aspiring AI Engineer</p>
+        </div>
+        <div class="ma-status"><span class="ma-dot"></span>Online</div>
+      </div>
+      <div class="ma-panel">
+        <div class="ma-thread" id="ma-thread"></div>
+        <div class="ma-suggestions">
+          <p>Try asking</p>
+          <div class="ma-chips" id="ma-chips"></div>
+        </div>
+        <div class="ma-inputrow">
+          <input type="text" id="ma-input" placeholder="Ask about Mariam's background, projects, or skills..." autocomplete="off" />
+          <button id="ma-send">Ask</button>
+        </div>
+      </div>
+      <p class="ma-footer">Answers are based only on Mariam's confirmed profile information.</p>
+    </div>
+  `;
+
+  const thread = root.querySelector('#ma-thread');
+  const chipsEl = root.querySelector('#ma-chips');
+  const inputEl = root.querySelector('#ma-input');
+  const sendBtn = root.querySelector('#ma-send');
+
+  function addMessage(role, contentHtml) {
+    const wrap = document.createElement('div');
+    wrap.className = 'ma-msg ' + role;
+    if (role === 'agent') {
+      wrap.innerHTML = `<div class="ma-avatar-sm">M</div><div class="ma-bubble">${contentHtml}</div>`;
+    } else {
+      wrap.innerHTML = `<div class="ma-bubble">${contentHtml}</div>`;
+    }
+    thread.appendChild(wrap);
+    thread.scrollTop = thread.scrollHeight;
+    return wrap;
+  }
+
+  function addTyping() {
+    const wrap = document.createElement('div');
+    wrap.className = 'ma-msg agent';
+    wrap.innerHTML = `<div class="ma-avatar-sm">M</div><div class="ma-bubble"><div class="ma-typing"><span></span><span></span><span></span></div></div>`;
+    thread.appendChild(wrap);
+    thread.scrollTop = thread.scrollHeight;
+    return wrap;
+  }
+
+  function respond(userText) {
+    addMessage('user', escapeHtml(userText));
+    inputEl.value = '';
+    sendBtn.disabled = true;
+    const typingNode = addTyping();
+    setTimeout(() => {
+      typingNode.remove();
+      const ans = getAnswer(userText);
+      const html = `<h4>${ans.title}</h4>${ans.html}`;
+      addMessage('agent', html);
+      sendBtn.disabled = false;
+    }, 480 + Math.random() * 260);
+  }
+
+  function escapeHtml(s) {
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  // Chips
+  SUGGESTIONS.forEach(q => {
+    const chip = document.createElement('button');
+    chip.className = 'ma-chip';
+    chip.textContent = q;
+    chip.addEventListener('click', () => respond(q));
+    chipsEl.appendChild(chip);
+  });
+
+  sendBtn.addEventListener('click', () => {
+    const v = inputEl.value.trim();
+    if (v) respond(v);
+  });
+  inputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const v = inputEl.value.trim();
+      if (v) respond(v);
+    }
+  });
+
+  // Welcome message
+  addMessage('agent', `<h4>Hi, I'm Mariam's AI Career Assistant</h4>
+    I can answer questions about Mariam's education, projects, internship, technical skills, and career interests —
+    based only on the information she's confirmed. Tap a suggestion below or type your own question.`);
+})();
+</script>
