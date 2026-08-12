@@ -18,7 +18,6 @@ function setupMobileNav() {
 
   if (!toggle || !links) return;
 
-
   toggle.addEventListener('click', () => {
 
     const isOpen = links.classList.toggle('open');
@@ -32,11 +31,18 @@ function setupMobileNav() {
 
 
   // Close the menu automatically when a link is clicked
+
   links.querySelectorAll('a').forEach((link) => {
 
     link.addEventListener('click', () => {
+
       links.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
+
+      toggle.setAttribute(
+        'aria-expanded',
+        'false'
+      );
+
     });
 
   });
@@ -49,8 +55,7 @@ function setupMobileNav() {
 
    A quiet canvas animation of moving dots (nodes) that draw
    a line between each other when they're close together —
-   a simple nod to neural networks / graphs, drawn with
-   plain JavaScript (no external library).
+   a simple nod to neural networks / graphs.
    --------------------------------------------------------- */
 
 function setupHeroCanvas() {
@@ -59,12 +64,11 @@ function setupHeroCanvas() {
 
   if (!canvas) return;
 
-
   const ctx = canvas.getContext('2d');
 
-  const prefersReducedMotion = window
-    .matchMedia('(prefers-reduced-motion: reduce)')
-    .matches;
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
 
 
   let width;
@@ -91,9 +95,11 @@ function setupHeroCanvas() {
       () => ({
 
         x: Math.random() * width,
+
         y: Math.random() * height,
 
         vx: (Math.random() - 0.5) * 0.3,
+
         vy: (Math.random() - 0.5) * 0.3
 
       })
@@ -113,25 +119,37 @@ function setupHeroCanvas() {
 
 
     // Move each node gently, bouncing off the edges
+
     nodes.forEach((n) => {
 
       n.x += n.vx;
       n.y += n.vy;
 
 
-      if (n.x < 0 || n.x > width) {
+      if (
+        n.x < 0 ||
+        n.x > width
+      ) {
+
         n.vx *= -1;
+
       }
 
 
-      if (n.y < 0 || n.y > height) {
+      if (
+        n.y < 0 ||
+        n.y > height
+      ) {
+
         n.vy *= -1;
+
       }
 
     });
 
 
     // Draw connecting lines between nearby nodes
+
     for (
       let i = 0;
       i < nodes.length;
@@ -145,23 +163,33 @@ function setupHeroCanvas() {
       ) {
 
         const dx =
-          nodes[i].x - nodes[j].x;
+          nodes[i].x -
+          nodes[j].x;
+
 
         const dy =
-          nodes[i].y - nodes[j].y;
-
-        const dist =
-          Math.sqrt(
-            dx * dx + dy * dy
-          );
+          nodes[i].y -
+          nodes[j].y;
 
 
-        if (dist < LINK_DISTANCE) {
+        const dist = Math.sqrt(
+          dx * dx +
+          dy * dy
+        );
+
+
+        if (
+          dist < LINK_DISTANCE
+        ) {
 
           ctx.strokeStyle =
-            `rgba(46, 196, 182, ${1 - dist / LINK_DISTANCE})`;
+            `rgba(46, 196, 182, ${
+              1 - dist / LINK_DISTANCE
+            })`;
+
 
           ctx.lineWidth = 1;
+
 
           ctx.beginPath();
 
@@ -170,10 +198,12 @@ function setupHeroCanvas() {
             nodes[i].y
           );
 
+
           ctx.lineTo(
             nodes[j].x,
             nodes[j].y
           );
+
 
           ctx.stroke();
 
@@ -185,12 +215,15 @@ function setupHeroCanvas() {
 
 
     // Draw the nodes themselves
+
     nodes.forEach((n) => {
 
       ctx.fillStyle =
         'rgba(247, 249, 251, 0.7)';
 
+
       ctx.beginPath();
+
 
       ctx.arc(
         n.x,
@@ -199,6 +232,7 @@ function setupHeroCanvas() {
         0,
         Math.PI * 2
       );
+
 
       ctx.fill();
 
@@ -226,6 +260,7 @@ function setupHeroCanvas() {
     () => {
 
       resize();
+
       makeNodes();
 
     }
@@ -235,13 +270,43 @@ function setupHeroCanvas() {
 
 
 /* ---------------------------------------------------------
-   3. INIT
+   3. CONTACT FORM
 
-   Run the required interactive functions once the page
-   has loaded.
+   The contact form is connected directly to Formspree
+   through the HTML form action.
 
-   The contact form is handled directly by Formspree,
-   so no JavaScript submit handler is needed here.
+   IMPORTANT:
+   We do NOT use event.preventDefault() here because
+   Formspree needs the browser to actually submit the form.
+
+   The form is handled by:
+
+   https://formspree.io/f/mppadkgd
+
+   After submission, Formspree displays its success page.
+   --------------------------------------------------------- */
+
+function setupContactForm() {
+
+  const form =
+    document.querySelector('.contact-form');
+
+
+  if (!form) return;
+
+
+  // No submit event handler is needed here.
+
+  // The browser will submit the form normally
+  // to the Formspree endpoint defined in contact.html.
+
+}
+
+
+/* ---------------------------------------------------------
+   4. INIT
+
+   Run everything once the page has loaded.
    --------------------------------------------------------- */
 
 document.addEventListener(
@@ -249,7 +314,10 @@ document.addEventListener(
   () => {
 
     setupMobileNav();
+
     setupHeroCanvas();
+
+    setupContactForm();
 
   }
 );
