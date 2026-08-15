@@ -1,82 +1,59 @@
 # Mariam's AI Career Assistant
 
-A rule-based interactive assistant that helps visitors explore Mariam Mohammed Abdelgawad's academic background, projects, internship experience, technical skills, and career interests.
+A rule-based interactive career assistant that answers questions about Mariam's education, internship, projects, technical skills, certifications, career interests, and contact information.
 
-The assistant is designed for recruiters, employers, students, and other visitors who want to learn about Mariam's profile through a simple question-and-answer interface instead of only reading a traditional CV.
-
-## Demo
-
-**Live Assistant:**
-https://mariam-abdelgawad.github.io/ai-portfolio/mariam_career_assistant.html
-
-**Demo Video:**
-https://youtu.be/8EEu2nKD1YY
-
-The demo video shows a live end-to-end run of the assistant, including normal profile questions and a guardrail example where the assistant refuses to invent information that is not included in the profile.
+The assistant is designed to provide information based only on Mariam's confirmed profile data.
 
 ---
 
-## What the Agent Does
+## What the Assistant Does
 
-The AI Career Assistant answers questions about information included in Mariam's confirmed profile.
+The assistant allows a user to ask questions about Mariam's profile through a chat-style interface.
 
 It can provide information about:
 
 * Education
 * GPA and expected graduation
 * FlyRank AI internship
-* Academic and technical projects
+* IoT Solar Panel Performance Monitoring System
+* Image Interpolation in MATLAB
+* Audio Amplifier using LM386 IC
+* Certifications
 * Technical skills
-* AI tools and AI Fluency work
 * Career interests
-* Contact information
 * Volunteer experience
+* Contact information
 
-The assistant is intentionally limited to information that has been confirmed for the profile.
-
-If a user asks about information that is not included, the assistant uses a fallback response instead of making up an answer.
-
-For example, if a user asks about experience with a technology that is not included in the profile, the assistant can respond that the information is not currently included in Mariam's profile.
+The assistant also provides suggested questions that users can click instead of typing their own question.
 
 ---
 
 ## Who It Is For
 
-The main users are:
+The assistant is intended for people who want to learn about Mariam's academic and technical background.
 
-* Recruiters
-* Internship reviewers
-* Potential employers
-* Students or peers
-* Anyone interested in Mariam's academic and technical background
+Users can ask questions about her:
 
-The goal is to make the portfolio easier to explore and give visitors a simple way to ask questions about the information already presented in the portfolio.
-
----
-
-## Main Design Decision
-
-I chose to build the first version as a **rule-based Q&A assistant** rather than a fully generative AI system.
-
-The reason is accuracy.
-
-The assistant represents my real academic and professional background, so I wanted every answer to come from confirmed profile information.
-
-A generative model could make the interaction more flexible, but it could also introduce information that I did not provide.
-
-With the rule-based approach, the available information is controlled and the assistant can fall back to a safe response when a question is outside the profile.
+* Education
+* Internship
+* Projects
+* Skills
+* Career interests
+* Contact information
 
 ---
 
 ## How It Works
 
-The assistant receives a user's question through the chat interface.
+The assistant uses a **rule-based, keyword-based question matching system**.
 
-The question is then matched against predefined topics and keywords.
+When a user enters a question:
 
-When a matching topic is found, the assistant returns the corresponding information from the profile data.
-
-If no relevant topic is detected, the assistant returns a fallback response indicating that the information is not currently included in the profile.
+1. The question is converted to lowercase.
+2. The assistant checks the question against predefined topics and keywords.
+3. It selects the topic with the matching keyword.
+4. It returns the corresponding information from the profile.
+5. If no relevant topic is detected, it returns a fallback response.
 
 ### Simple Data Flow
 
@@ -98,22 +75,18 @@ Profile information      Fallback response
   +----------+-----------+
              |
              v
-        Assistant response
+      Assistant response
 ```
-
-The important part of this design is that the assistant does not generate new profile facts. It retrieves responses from the information defined for the assistant.
 
 ---
 
 ## Architecture
 
-The project consists of a standalone HTML page containing the assistant interface and the logic required to process questions.
-
-### Main components
+The assistant is implemented in a single HTML file:
 
 ```text
 mariam_career_assistant.html
-│
+|
 ├── User Interface
 │   ├── Assistant introduction
 │   ├── Suggested questions
@@ -122,48 +95,51 @@ mariam_career_assistant.html
 │
 ├── Profile Data
 │   ├── Education
-│   ├── Experience
+│   ├── Internship
 │   ├── Projects
+│   ├── Certifications
 │   ├── Skills
-│   └── Career information
+│   ├── Career information
+│   └── Contact information
 │
 └── Question Handling
-    ├── Keyword/topic matching
+    ├── Keyword matching
+    ├── Intent selection
     ├── Response selection
-    └── Fallback / guardrail response
+    └── Fallback response
 ```
 
-The assistant is hosted as part of my GitHub Pages portfolio.
+The profile information is stored in the `PROFILE` and `ANSWERS` objects inside the HTML file.
+
+The question topics are defined in the `INTENTS` array.
 
 ---
 
 ## Setup
 
-The assistant does not require a database, API key, or external AI model to run.
+The assistant does not require a database, API key, or external AI model.
 
 ### Requirements
 
 * A web browser
-* The project files
-* Internet connection for the live GitHub Pages version
+* The `mariam_career_assistant.html` file
 
 ### Running Locally
 
-1. Download or clone the portfolio repository.
-2. Make sure `mariam_career_assistant.html` is in the same project directory as the other portfolio HTML files.
-3. Open `mariam_career_assistant.html` in a web browser.
+1. Save the project file as:
 
-The assistant can also be accessed directly from the live portfolio:
+```text
+mariam_career_assistant.html
+```
 
-https://mariam-abdelgawad.github.io/ai-portfolio/mariam_career_assistant.html
-
-No separate backend setup is required for the current version.
+2. Open the file in a web browser.
+3. Use the suggested questions or type a question into the input field.
 
 ---
 
 ## Usage
 
-A visitor can either click one of the suggested questions or type a question into the input field.
+A user can either click one of the suggested questions or type a custom question.
 
 ### Example Questions
 
@@ -172,238 +148,119 @@ Who is Mariam?
 
 What is her education background?
 
-Tell me about the FlyRank internship.
+Tell me about the FlyRank internship
 
 What projects has she worked on?
 
 What are her technical skills?
 
-What is Mariam's career direction?
+What is she looking for in a career?
+
+How can I contact her?
 ```
 
-The assistant responds based on the corresponding information in the profile.
-
-### Guardrail Example
-
-A user can also ask about something that is not included in the profile.
-
-For example:
-
-```text
-What is Mariam's experience with TensorFlow?
-```
-
-If TensorFlow experience is not included in the profile, the assistant does not create an answer claiming that Mariam has TensorFlow experience.
-
-Instead, it uses the fallback response.
-
-This is an intentional part of the design.
+The assistant then returns the corresponding profile information.
 
 ---
 
-## Evaluation / V2 Testing
+## Guardrail
 
-For the second version, I tested the assistant using both normal profile questions and questions outside the confirmed profile.
+One important part of the assistant is that it should not invent information that is not included in the profile.
 
-### Test 1 — General Profile Question
-
-**Question:**
+If the question does not match one of the predefined topics, the assistant returns:
 
 ```text
-Who is Mariam?
+That information is not currently included in Mariam's profile.
 ```
 
-**Expected behavior:**
+For example, asking about a technology that is not included in the profile results in the fallback response instead of an invented experience claim.
 
-Return a concise overview of Mariam's academic background, projects, internship experience, and career direction.
-
-**Result:**
-
-Pass — the assistant returned profile information.
+This keeps the assistant's answers limited to the information defined in the profile.
 
 ---
 
-### Test 2 — Education
+## Main Design Decision
 
-**Question:**
+I chose a **rule-based approach** instead of connecting the assistant to a generative AI model.
 
-```text
-What is her education background?
-```
+The main reason is control over the information returned by the assistant.
 
-**Expected behavior:**
+The assistant represents a real person's profile, so the responses need to stay within the information that has been defined and confirmed.
 
-Return the confirmed university, major, current year, expected graduation year, and GPA.
-
-**Result:**
-
-Pass — the assistant returned the available education information.
+Using predefined topics, keywords, and responses makes the assistant's behavior predictable and prevents it from generating unsupported profile information.
 
 ---
 
-### Test 3 — Internship
+## Technical Implementation
 
-**Question:**
+The assistant uses:
 
-```text
-Tell me about the FlyRank internship.
-```
+* HTML for the page structure
+* CSS for the interface styling
+* JavaScript for the assistant logic
 
-**Expected behavior:**
+The JavaScript handles:
 
-Explain the FlyRank AI Fluency experience without presenting it as professional AI engineering employment.
+* Profile data
+* Predefined answers
+* Keyword matching
+* Question handling
+* Chat message rendering
+* Suggested questions
+* Typing animation
+* Fallback responses
 
-**Result:**
+The interface includes:
 
-Pass — the assistant returned the relevant internship information.
-
----
-
-### Test 4 — Projects
-
-**Question:**
-
-```text
-What projects has she worked on?
-```
-
-**Expected behavior:**
-
-Return projects included in the profile.
-
-**Result:**
-
-Pass — the assistant returned the available project information.
-
----
-
-### Test 5 — Technical Skills
-
-**Question:**
-
-```text
-What are her technical skills?
-```
-
-**Expected behavior:**
-
-Return the confirmed technical skills included in the profile.
-
-**Result:**
-
-Pass — the assistant returned the available skills.
-
----
-
-### Test 6 — Out-of-Profile Question / Guardrail
-
-**Question:**
-
-```text
-What is Mariam's experience with TensorFlow?
-```
-
-**Expected behavior:**
-
-Do not invent TensorFlow experience.
-
-**Result:**
-
-Pass — the assistant uses its fallback behavior when the requested information is not included in the profile.
+* Profile/avatar area
+* Assistant title
+* Online status indicator
+* Chat message area
+* Suggested-question buttons
+* Text input
+* Ask button
 
 ---
 
 ## Limitations
 
-The current version has several limitations.
-
 ### 1. Keyword-Based Matching
 
-The assistant uses predefined keywords and topics to identify what the user is asking.
+The assistant relies on predefined keywords.
 
 Because of this, differently worded questions may not always match the intended topic.
 
-For example, a question that uses completely different wording from the predefined patterns may receive the fallback response even when related information exists.
+### 2. Not a Generative AI Model
 
-### 2. Not a Fully Generative AI Model
+The current version does not connect to an external AI model.
 
-The current version does not make a live call to an LLM such as Claude or ChatGPT.
-
-It uses predefined profile information and response logic.
-
-This makes the assistant more controlled, but less flexible than a generative AI assistant.
+It uses predefined profile information and JavaScript response logic.
 
 ### 3. Fixed Profile Information
 
-The assistant only knows the information that was included in its profile data.
+The assistant only knows the information stored in its profile data.
 
-If new projects, skills, certifications, or experiences are added later, the profile data and responses need to be updated.
+If the profile changes, the corresponding information and responses need to be updated in the code.
 
 ### 4. No Conversation Memory
 
-The current version is designed around individual questions and predefined responses rather than maintaining a long conversation history.
+The assistant handles individual questions and predefined responses.
 
----
-
-## Why the Guardrail Matters
-
-The most important guardrail is preventing the assistant from inventing information about my background.
-
-A career assistant represents a real person's experience, so an incorrect answer could make the portfolio misleading.
-
-The fallback behavior makes the boundary of the assistant clear:
-
-> If the information is not included in the profile, the assistant should not pretend that it knows the answer.
+It does not maintain a long conversation history.
 
 ---
 
 ## What I Learned
 
-This project helped me understand that building an assistant is not only about making it answer questions.
+This project helped me understand how a personal assistant can be built around a controlled set of information.
 
-I also had to think about:
+I learned how to:
 
-* What information the assistant is allowed to use
-* How questions are mapped to information
-* How to handle questions outside the available data
-* How to prevent unsupported claims
-* How to make the assistant useful while keeping its behavior predictable
+* Organize profile information into structured data
+* Match user questions to predefined topics
+* Return different responses based on the detected topic
+* Handle questions outside the available information
+* Use a guardrail to avoid unsupported claims
+* Build a simple interactive chat-style interface
 
-The project also showed me the trade-off between flexibility and control.
-
-A generative AI system could understand more variations of the same question, but the rule-based version gives me tighter control over the information that can be returned.
-
----
-
-## Future Improvements
-
-Possible future improvements include:
-
-* More flexible natural-language question matching
-* A larger set of supported questions
-* Better handling of differently worded questions
-* More conversational interactions
-* Connecting the assistant to a controlled knowledge source
-* Adding an LLM while keeping the profile-data guardrail
-
-These are future possibilities and are not part of the current implementation.
-
----
-
-## Project Status
-
-**Status:** Completed
-
-**Type:** Interactive portfolio feature
-
-**Deployment:** GitHub Pages
-
-**Architecture:** Rule-based Q&A
-
-**External AI API:** Not required for the current version
-
-**Live Assistant:**
-https://mariam-abdelgawad.github.io/ai-portfolio/mariam_career_assistant.html
-
-**Demo Video:**
-https://youtu.be/8EEu2nKD1YY
+The project also showed the trade-off between flexibility and control: a generative system could handle more variations of questions, while a rule-based system provides tighter control over the information returned.
